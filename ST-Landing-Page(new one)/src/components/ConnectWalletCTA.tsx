@@ -1,4 +1,4 @@
-import freighter from "@stellar/freighter-api";
+import { isConnected, requestAccess } from "@stellar/freighter-api";
 import { ArrowRight, CheckCircle2, Lock } from "lucide-react";
 import { useState } from "react";
 
@@ -9,12 +9,12 @@ export default function ConnectWalletCTA() {
     if (state !== "idle") return;
     setState("connecting");
     try {
-      const { isConnected: hasFreighter } = await freighter.isConnected();
+      const { isConnected: hasFreighter } = await isConnected();
       if (!hasFreighter) {
         setState("idle");
         return;
       }
-      const { address, error } = await freighter.requestAccess();
+      const { address, error } = await requestAccess();
       if (error || !address) {
         setState("idle");
         return;
