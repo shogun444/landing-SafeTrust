@@ -3,6 +3,7 @@ import react from "@astrojs/react";
 import icon from "astro-icon";
 
 export default defineConfig({
+  integrations: [react()],
   vite: {
     css: {
       postcss: {
